@@ -10,6 +10,8 @@
 class TleDataset
 {
 public:
+    TleDataset(const std::string iUrl) : URL(iUrl) {}
+
     void fetch()
     {
         try
@@ -47,7 +49,6 @@ public:
                     line2 = "";
                 }
             }
-
         }
         catch (const std::exception &e)
         {
@@ -58,5 +59,5 @@ public:
     std::vector<std::shared_ptr<TleRecord>> records;
 
 private:
-    std::string URL = "http://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle";
+    const std::string URL;
 };
