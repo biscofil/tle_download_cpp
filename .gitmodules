@@ -1,3 +1,0 @@
-[submodule "HTTPRequest"]
-	path = HTTPRequest
-	url = git@github.com:elnormous/HTTPRequest.git

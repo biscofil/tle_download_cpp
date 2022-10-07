@@ -1,9 +1,28 @@
 cmake_minimum_required(VERSION 3.13)
 
-project(cmake_testapp)
+project(tle_download)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
-add_executable(cmake_testapp main.cpp)
+add_executable(build main.cpp)
 
-include_directories(HTTPRequest/include)
+Include(FetchContent)
+
+FetchContent_Declare(
+  Requests
+  GIT_REPOSITORY git@github.com:elnormous/HTTPRequest.git
+  GIT_TAG        v0.2 # or a later release
+)
+
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.0.1 # or a later release
+)
+
+
+FetchContent_MakeAvailable(Requests)
+FetchContent_MakeAvailable(Catch2)
+
+add_executable(tests test.cpp)
+target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
