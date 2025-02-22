@@ -12,18 +12,31 @@ class TleDataset
 public:
     TleDataset(const std::string iUrl) : URL(iUrl) {}
 
-    void fetch()
+    bool fetchFromUrl(std::string &oBody) const
     {
         try
         {
-            // you can pass http::InternetProtocol::V6 to Request to make an IPv6 request
+            std::cout << "Fetching from URL: " << URL << std::endl;
             http::Request request{URL};
-
-            // send a get request
             const auto response = request.send("GET");
-
+            std::cout << "Response status code: " << response.status.code << std::endl;
             const std::string body(response.body.begin(), response.body.end());
+            oBody = body;
+            return true;
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "Request failed, error: " << e.what() << '\n';
+            return false;
+        }
+    }
 
+    void fetch()
+    {
+        std::string body;
+
+        if (fetchFromUrl(body))
+        {
             std::istringstream f(body);
             std::string line, line0, line1, line2;
             while (std::getline(f, line))
@@ -50,14 +63,9 @@ public:
                 }
             }
         }
-        catch (const std::exception &e)
-        {
-            std::cerr << "Request failed, error: " << e.what() << '\n';
-        }
     }
-
-    std::vector<std::shared_ptr<TleRecord>> records;
 
 private:
     const std::string URL;
+    std::vector<std::shared_ptr<TleRecord>> records;
 };

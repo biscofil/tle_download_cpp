@@ -10,14 +10,14 @@ Include(FetchContent)
 
 FetchContent_Declare(
   Requests
-  GIT_REPOSITORY git@github.com:elnormous/HTTPRequest.git
-  GIT_TAG        v0.2 # or a later release
+  GIT_REPOSITORY https://github.com/elnormous/HTTPRequest.git
+  GIT_TAG        v0.3 # or a later release
 )
 
 FetchContent_Declare(
   Catch2
   GIT_REPOSITORY https://github.com/catchorg/Catch2.git
-  GIT_TAG        v3.0.1 # or a later release
+  GIT_TAG        v3.8.0 # or a later release
 )
 
 

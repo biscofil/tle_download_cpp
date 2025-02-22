@@ -4,8 +4,8 @@
 int main(void)
 {
 
-    TleDataset aaa("http://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle");
-    aaa.fetch();
+    TleDataset ds("http://celestrak.org/NORAD/elements/gp.php?GROUP=noaa&FORMAT=tle");
+    ds.fetch();
 
     return 0;
 }

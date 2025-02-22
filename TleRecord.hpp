@@ -9,8 +9,8 @@ class TleRecord
 public:
     std::string name;
     char classification;
-    int catalog_number, year, epoch_year;
-    float epoch, mean_motion_first_derivative, mean_motion_second_derivative, b_star ;
+    int catalog_number, year, epoch_year, element_set_number;
+    float epoch, mean_motion_first_derivative, mean_motion_second_derivative, b_star, inclination, eccentricity;
 
     std::string toString() const
     {
@@ -18,7 +18,7 @@ public:
                           "CLASS " + classification + ", " +                  //
                           "CATNUM " + std::to_string(catalog_number) + ", " + //
                           "EPOCH YEAR " + std::to_string(epoch_year) + ", " + //
-                          "EPOCH " + std::to_string(epoch) + ", " + //
+                          "EPOCH " + std::to_string(epoch) + ", " +           //
                           "YEAR " + std::to_string(year) + "]";
         return out;
     }
@@ -33,10 +33,14 @@ public:
         out->classification = line1.at(7);
         out->year = std::stoi(line1.substr(9, 2));
         out->epoch_year = std::stoi(line1.substr(18, 2));
-        out->epoch = std::stof(line1.substr(10, 11));
+        out->epoch = std::stof(line1.substr(20, 11));
         out->mean_motion_first_derivative = std::stof(line1.substr(33, 11));
         out->mean_motion_second_derivative = std::stof(line1.substr(44, 11));
         out->b_star = std::stof(line1.substr(53, 11));
+        out->element_set_number = std::stoi(line1.substr(64, 4));
+
+        out->inclination = std::stof(line2.substr(8, 7));
+        out->eccentricity = std::stof(std::string("0.") + line2.substr(26, 7));
 
         return out;
     }

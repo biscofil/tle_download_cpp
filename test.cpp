@@ -4,7 +4,6 @@
 #include "TleRecord.hpp"
 #include "_deps/catch2-src/src/catch2/catch_all.hpp"
 
-
 TEST_CASE("Decoding is valid", "[decoding]")
 {
     std::string line0 = "NOAA 1 [-]                  ";
@@ -17,4 +16,12 @@ TEST_CASE("Decoding is valid", "[decoding]")
     REQUIRE(ptr->catalog_number == 4793);
     REQUIRE(ptr->classification == 'U');
     REQUIRE(ptr->year == 70);
+    REQUIRE(ptr->epoch_year == 22);
+    REQUIRE(ptr->epoch == 245.45854f);
+    //REQUIRE(ptr->mean_motion_first_derivative == -0.00000050);
+    //REQUIRE(ptr->mean_motion_second_derivative == 0.00000000);
+    REQUIRE(ptr->element_set_number == 999);
+
+    REQUIRE(ptr->inclination == 101.55f);
+    REQUIRE(ptr->eccentricity == 0.0031822f);
 }
