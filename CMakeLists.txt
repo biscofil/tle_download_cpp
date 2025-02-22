@@ -4,7 +4,7 @@ project(tle_download)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(build main.cpp)
+add_executable(build src/main.cpp)
 
 Include(FetchContent)
 
@@ -24,5 +24,5 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Requests)
 FetchContent_MakeAvailable(Catch2)
 
-add_executable(tests test.cpp)
+add_executable(tests test/test.cpp)
 target_link_libraries(tests PRIVATE Catch2::Catch2WithMain)
